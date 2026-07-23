@@ -52,6 +52,10 @@ Wer das Bot-Token hat, steuert den Bot. Es steht deshalb nur in der lokalen
 `os.getenv()`. Fehlt der Wert, bricht der Bot beim Start mit einer klaren
 Meldung ab, statt sich mit leerem Token zu verbinden.
 
+## Lizenz
+
+MIT — siehe [LICENSE](LICENSE). Nimm dir raus, was du brauchst.
+
 ---
 
 [@Richard26-cyber](https://github.com/Richard26-cyber) · Cyber-Security-Student
