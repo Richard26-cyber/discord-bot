@@ -49,6 +49,36 @@ class Geburtstage(commands.Cog):
             ephemeral=True
         )
 
+    # ── Löschen ────────────────────────────────────────────────────────────────
+
+    @app_commands.command(name="geburtstag-loeschen",
+                          description="Löscht deinen gespeicherten Geburtstag wieder.")
+    async def geburtstag_loeschen(self, interaction: discord.Interaction):
+        """Wer Daten eintragen kann, muss sie auch wieder entfernen können.
+
+        Ein Geburtsdatum ist ein personenbezogenes Datum — ohne diesen Befehl
+        bliebe es für immer in der bot.db, auch nach dem Verlassen des Servers.
+
+        Die user_id ist der Primärschlüssel der Tabelle, die Abfrage kann also
+        gar nichts anderes treffen als den eigenen Eintrag — eine zusätzliche
+        Besitzprüfung wie bei den Zitaten braucht es hier nicht. Bewusst auch
+        ohne Admin-Sonderweg: fremde Geburtstage zu löschen ist keine
+        Moderationsaufgabe.
+        """
+        with database.get_conn() as conn:
+            geloescht = conn.execute(
+                "DELETE FROM geburtstage WHERE user_id=?", (interaction.user.id,)
+            ).rowcount
+
+        if geloescht:
+            text = ("🗑️ Dein Geburtstag wurde gelöscht. Ich gratuliere dir "
+                    "nicht mehr automatisch — mit `/geburtstag` kannst du ihn "
+                    "jederzeit neu eintragen.")
+        else:
+            text = "Du hast gar keinen Geburtstag eingetragen — es gibt nichts zu löschen."
+
+        await interaction.response.send_message(text, ephemeral=True)
+
     # ── Täglicher Check um 08:00 ───────────────────────────────────────────────
 
     @tasks.loop(time=discord.utils.utcnow().replace(hour=6, minute=0, second=0, microsecond=0).timetz())

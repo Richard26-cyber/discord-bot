@@ -11,6 +11,7 @@ BEFEHLE = [
     ]),
     ("🎂 Geburtstage", [
         ("/geburtstag [TT.MM.JJJJ]",          "Deinen Geburtstag eintragen"),
+        ("/geburtstag-loeschen",               "Deinen gespeicherten Geburtstag wieder löschen"),
         ("/bevorstehende-geburtstage",         "Alle bevorstehenden Geburtstage anzeigen"),
     ]),
     ("📜 Zitate & Motivation", [
