@@ -1,0 +1,21 @@
+# Secrets – niemals in Git!
+.env
+
+# Datenbank
+bot.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtuelle Umgebung
+venv/
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# PyCharm
+.idea/
